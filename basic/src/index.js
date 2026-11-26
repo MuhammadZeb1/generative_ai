@@ -7,17 +7,14 @@ const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
 
 async function generateText(prompt) {
   // Exact models from your account's list
-  const models = [
-    "gemini-3.8-flash",
-    "gemma-4-31b-it",
-    "gemini-3.5-flash-lite",
-    "gemini-3.7-flash",
-  ];
+  const models = 
+    "gemini-3.8-flash"
+    
 
-  for (const model of models) {
+  
     try {
       const response = await ai.models.generateContent({
-        model,
+        models,
         contents: prompt,
       });
 
@@ -25,11 +22,10 @@ async function generateText(prompt) {
       console.log(response.text);
       return;
     } catch (error) {
-      console.log(`${model} skipped (${error.status || error.message}), trying next...`);
+      console.log(`${models} skipped (${error.status || error.message}), trying next...`);
     }
   }
 
   console.error("All models failed. Please try again in a few moments.");
-}
 
 generateText("Write a poem about the beauty of nature.");
